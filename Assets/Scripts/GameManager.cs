@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     // GameObject Variables
     public GameObject startMenu, inGameUI, instructionsMenu, endgameMenu;
+    public GameObject obstacles, ball;
 
     // Sprite Variables
 
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     // Opens the Start Menu
     public void OpenStart()
     {
+        DisableObjects();
         CloseMenus();
         startMenu.SetActive(true);
     }
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
     // Opens the In-Game UI Menu
     public void OpenGameUI()
     {
+        ActivateObjects();
         CloseMenus();
         inGameUI.SetActive(true);
     }
@@ -89,7 +92,22 @@ public class GameManager : MonoBehaviour
     public void OpenEndgame()
     {
         gameActive = false;
+        DisableObjects();
         CloseMenus();
         endgameMenu.SetActive(true);
+    }
+
+    // Deactivates GameObjects in the scene that aren't part of the Canvas
+    public void DisableObjects()
+    {
+        obstacles.SetActive(false);
+        ball.SetActive(false);
+    }
+
+    // Activates GameObjects in the scene that aren't part of the Canvas
+    public void ActivateObjects()
+    {
+        obstacles.SetActive(true);
+        ball.SetActive(true);
     }
 }
