@@ -13,6 +13,9 @@ public class BallController : MonoBehaviour
 
     // Float Variables
     private float startX, startY;
+
+    // Rigidbody2D Variables
+    public Rigidbody2D rb;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,6 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(rb.velocity.y);
     }
 }
