@@ -14,6 +14,7 @@ public class LeverController : MonoBehaviour
 
     // Collider2D Variables
     Collider2D target;
+    public Collider2D lever;
 
     // Rigidbody2D Variables
     public Rigidbody2D rb;
@@ -50,7 +51,7 @@ public class LeverController : MonoBehaviour
             target = Physics2D.OverlapPoint(mousePos);
             
             // Moves the lever if the mouse is overlapping
-            if (target)
+            if (target == lever)
             {
                 // Ensures mousePos isn't out of bounds
                 if((mousePos.y <= yRoof) && (mousePos.y >= yFloor))
