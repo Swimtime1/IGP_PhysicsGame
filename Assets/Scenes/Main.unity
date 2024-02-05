@@ -152,8 +152,8 @@ Transform:
   m_GameObject: {fileID: 11369082}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -2, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1}
+  m_LocalPosition: {x: -2.592, y: -1.58, z: 0}
+  m_LocalScale: {x: 0.1322393, y: 0.16385496, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 270168015}
@@ -171,18 +171,18 @@ HingeJoint2D:
   m_ConnectedRigidBody: {fileID: 482982132}
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
-  m_BreakAction: 2
+  m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.46099997, y: 0.0039999485}
-  m_UseMotor: 0
+  m_Anchor: {x: 4.5138125, y: -2.564876}
+  m_ConnectedAnchor: {x: -0.45609665, y: 0.0037322044}
+  m_UseMotor: 1
   m_Motor:
-    m_MotorSpeed: 0
+    m_MotorSpeed: -10000
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: 0
-    m_UpperAngle: 359
+    m_LowerAngle: -88.36036
+    m_UpperAngle: 58.86857
 --- !u!50 &11369085
 Rigidbody2D:
   serializedVersion: 4
@@ -217,7 +217,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11369082}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -244,7 +244,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.11097917
 --- !u!212 &11369087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -470,6 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 145359242}
+  - component: {fileID: 145359243}
   m_Layer: 0
   m_Name: Flippers
   m_TagString: Untagged
@@ -493,6 +494,23 @@ Transform:
   - {fileID: 270168015}
   m_Father: {fileID: 100582441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &145359243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145359241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c4aa092f29b4c4468fc90e732916ba8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeft: 0
+  lrb: {fileID: 482982132}
+  force: 10
+  lHinge: {fileID: 11369084}
+  rHinge: {fileID: 11369084}
 --- !u!1 &270168014
 GameObject:
   m_ObjectHideFlags: 0
