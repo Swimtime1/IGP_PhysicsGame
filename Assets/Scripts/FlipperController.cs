@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class FlipperController : MonoBehaviour
 {
-    // Boolean Variables
-    public bool isLeft;
-
     // Rigidbody2D Variables
-    public Rigidbody2D lrb/* , rrb */;
+    public Rigidbody2D lrb, rrb;
 
     // Float Variables
     public float force;
@@ -44,7 +41,7 @@ public class FlipperController : MonoBehaviour
         }
 
         // Adds Force to right Flipper
-        /* if(Input.GetKey(KeyCode.D))
+        if(Input.GetKey(KeyCode.D))
         {
             rHinge.useMotor = false;
             rrb.AddForce(transform.up * force, ForceMode2D.Impulse);
@@ -52,7 +49,7 @@ public class FlipperController : MonoBehaviour
         else if(Input.GetKeyUp(KeyCode.D))
         {
             rHinge.useMotor = true;
-            rrb.AddForce(-transform.up * force, ForceMode2D.Impulse);
-        } */
+            /* rrb.AddForce(-transform.up * force, ForceMode2D.Impulse); */
+        }
     }
 }
