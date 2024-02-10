@@ -13,10 +13,21 @@ public class FlipperController : MonoBehaviour
     // HingeJoint2D Variables
     public HingeJoint2D lHinge, rHinge;
 
+    // AudioSource Variables
+    public AudioSource lAudio, rAudio;
+
+    // AudioClip Variables
+    public AudioClip swoosh;
+
+    // Boolean Variables
+    private bool lUp, rUp;
+
     // Start is called before the first frame update
     void Start()
     {
         force = 100f;
+        lUp = false;
+        rUp = false;
     }
 
     // Update is called once per frame
@@ -33,11 +44,19 @@ public class FlipperController : MonoBehaviour
         {
             lHinge.useMotor = false;
             lrb.AddForce(transform.up * force, ForceMode2D.Impulse);
+
+            // Plays a swooshing sound when the flipper first goes up
+            if(!lUp)
+            {
+                lAudio.PlayOneShot(swoosh);
+                lUp = true;
+            }
         }
         else if(Input.GetKeyUp(KeyCode.A))
         {
             lHinge.useMotor = true;
             lrb.AddForce(-transform.up * force, ForceMode2D.Impulse);
+            lUp = false;
         }
 
         // Adds Force to right Flipper
@@ -45,11 +64,19 @@ public class FlipperController : MonoBehaviour
         {
             rHinge.useMotor = false;
             rrb.AddForce(transform.up * force, ForceMode2D.Impulse);
+
+            // Plays a swooshing sound when the flipper first goes up
+            if(!rUp)
+            {
+                rAudio.PlayOneShot(swoosh);
+                rUp = true;
+            }
         }
         else if(Input.GetKeyUp(KeyCode.D))
         {
             rHinge.useMotor = true;
-            /* rrb.AddForce(-transform.up * force, ForceMode2D.Impulse); */
+            rrb.AddForce(-transform.up * force, ForceMode2D.Impulse);
+            rUp = false;
         }
     }
 }
