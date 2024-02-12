@@ -42,18 +42,19 @@ public class FlipperController : MonoBehaviour
         // Adds Force to left Flipper
         if(Input.GetKey(KeyCode.A))
         {
-            lHinge.useMotor = false;
-            lrb.AddForce(transform.up * force, ForceMode2D.Impulse);
-
             // Plays a swooshing sound when the flipper first goes up
             if(!lUp)
             {
                 lAudio.PlayOneShot(swoosh);
                 lUp = true;
             }
+
+            lHinge.useMotor = false;
+            lrb.AddForce(transform.up * force, ForceMode2D.Impulse);
         }
         else if(Input.GetKeyUp(KeyCode.A))
         {
+            lAudio.PlayOneShot(swoosh);
             lHinge.useMotor = true;
             lrb.AddForce(-transform.up * force, ForceMode2D.Impulse);
             lUp = false;
@@ -62,18 +63,19 @@ public class FlipperController : MonoBehaviour
         // Adds Force to right Flipper
         if(Input.GetKey(KeyCode.D))
         {
-            rHinge.useMotor = false;
-            rrb.AddForce(transform.up * force, ForceMode2D.Impulse);
-
             // Plays a swooshing sound when the flipper first goes up
             if(!rUp)
             {
                 rAudio.PlayOneShot(swoosh);
                 rUp = true;
             }
+
+            rHinge.useMotor = false;
+            rrb.AddForce(transform.up * force, ForceMode2D.Impulse);
         }
         else if(Input.GetKeyUp(KeyCode.D))
         {
+            rAudio.PlayOneShot(swoosh);
             rHinge.useMotor = true;
             rrb.AddForce(-transform.up * force, ForceMode2D.Impulse);
             rUp = false;

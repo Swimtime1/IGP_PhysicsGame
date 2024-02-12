@@ -21,4 +21,6 @@ RESOURCES:
 * https://gamedevbeginner.com/how-to-move-an-object-with-the-mouse-in-unity-in-2d/#:~:text=The%20basic%20method%20of%20dragging,to%20detect%20when%20it's%20clicked.
 * https://www.reddit.com/r/pinball/comments/3jc29f/what_are_the_most_common_angular_extents_used_for/
 * https://discussions.unity.com/t/setting-rigidbodys-force-to-0/114358
+* https://pinside.com/pinball/forum/topic/flippers-weight
+* https://freesound.org/people/deleted_user_13668154/sounds/616483/
 * 
