@@ -10,6 +10,7 @@ public class BallController : MonoBehaviour
 {
     // Script Variables
     public GameManager gameManager;
+    public GoalController gc1000, gc500, gc100;
 
     // Float Variables
     private float startX, startY;
@@ -39,8 +40,28 @@ public class BallController : MonoBehaviour
     }
 
     // Plays a sound on collisions
-    void OnCollisionExit2D(Collision2D col)
+    void OnCollisionExit2D(Collision2D other)
     {
         audioSource.PlayOneShot(bounce);
+    }
+
+    // Called when a collision is detected
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        // ends the game
+        if(other.gameObject.CompareTag("Bottom")) { gameManager.OpenEndgame(); }
+    }
+
+    // Called when a trigger is entered
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // checks if the 1000 point goal was triggered
+        if(other.gameObject.CompareTag("1000")) { StartCoroutine(gc1000.Trigger()); }
+
+        // checks if the 500 point goal was triggered
+        else if(other.gameObject.CompareTag("500")) { StartCoroutine(gc500.Trigger()); }
+
+        // checks if the 100 point goal was triggered
+        else if(other.gameObject.CompareTag("100")) { StartCoroutine(gc100.Trigger()); }
     }
 }

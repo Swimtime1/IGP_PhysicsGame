@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     // Sprite Variables
 
     // TextMeshProUGUI Variables
+    public TextMeshProUGUI scoreText;
 
     // Boolean Variables
     public static bool gameActive, tutActive;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     // Float Variables
 
     // Integer Variables
+    private int score;
 
     // Script Variables
 
@@ -35,6 +37,9 @@ public class GameManager : MonoBehaviour
         gameActive = false;
         tutActive = false;
         OpenStart();
+
+        score = 0;
+        scoreText.text = "Score: 00000" + score;
     }
 
     // Gives control over to the Player
@@ -109,5 +114,19 @@ public class GameManager : MonoBehaviour
     {
         obstacles.SetActive(true);
         ball.SetActive(true);
+    }
+
+    // Updates the score
+    public void UpdateScore(int points)
+    {
+        score += points;
+
+        // pads the score with 0's
+        if(score < 10) { scoreText.text = "Score: 00000" + score; }
+        else if(score < 100) { scoreText.text = "Score: 0000" + score; }
+        else if(score < 1000) { scoreText.text = "Score: 000" + score; }
+        else if(score < 10000) { scoreText.text = "Score: 00" + score; }
+        else if(score < 100000) { scoreText.text = "Score: 0" + score; }
+        else { scoreText.text = "Score: " + score; }
     }
 }
