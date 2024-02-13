@@ -25,7 +25,7 @@ public class BallController : MonoBehaviour
     public AudioClip bounce;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         startX = 3f;
         startY = -1f;

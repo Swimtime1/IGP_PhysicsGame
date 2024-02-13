@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     // Sprite Variables
 
     // TextMeshProUGUI Variables
-    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI scoreText, endScoreText;
 
     // Boolean Variables
     public static bool gameActive, tutActive;
@@ -100,6 +100,7 @@ public class GameManager : MonoBehaviour
         DisableObjects();
         CloseMenus();
         endgameMenu.SetActive(true);
+        UpdateScoreText(endScoreText);
     }
 
     // Deactivates GameObjects in the scene that aren't part of the Canvas
@@ -120,7 +121,12 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int points)
     {
         score += points;
+        UpdateScoreText(scoreText);
+    }
 
+    // Updates the score in the UI
+    public void UpdateScoreText(TextMeshProUGUI scoreText)
+    {
         // pads the score with 0's
         if(score < 10) { scoreText.text = "Score: 00000" + score; }
         else if(score < 100) { scoreText.text = "Score: 0000" + score; }
@@ -128,5 +134,19 @@ public class GameManager : MonoBehaviour
         else if(score < 10000) { scoreText.text = "Score: 00" + score; }
         else if(score < 100000) { scoreText.text = "Score: 0" + score; }
         else { scoreText.text = "Score: " + score; }
+    }
+
+    // Resets the score and the ball
+    public void Reset()
+    {
+        score = 0;
+        UpdateScoreText(scoreText);
+        StartGame();
+    }
+
+    // Restarts the game
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
