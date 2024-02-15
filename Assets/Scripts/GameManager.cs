@@ -106,29 +106,30 @@ public class GameManager : MonoBehaviour
     // Shows the Endgame Menu little-by-little
     IEnumerator DisplayEndgame()
     {
-        yield return new WaitForSeconds(0.5f);
+        keyDown = false;
+        
+        // skips the wait if a key has been pressed
+        if(!keyDown) { yield return new WaitForSeconds(0.5f); }
 
         // Display Game Over text
         gameOverText.SetActive(true);
 
-        yield return new WaitForSeconds(0.5f);
+        // skips the wait if a key has been pressed
+        if(!keyDown) { yield return new WaitForSeconds(0.5f); }
 
         // Counts up score in UI
-        keyDown = false;
         endScore.SetActive(true);
-        for(int i = 0; i < score; i++)
+        for(int i = 0; (i < score) && (!keyDown); i++)
         {
             UpdateScoreText(endScoreText, i);
             UpdateScoreColor(endScoreText, i);
             yield return new WaitForSeconds(0.1f);
-
-            // Stops early if the player presses a key
-            if(keyDown) { break; }
         }
         UpdateScoreText(endScoreText, score);
         UpdateScoreColor(endScoreText, score);
 
-        yield return new WaitForSeconds(0.5f);
+        // skips the wait if a key has been pressed
+        if(!keyDown) { yield return new WaitForSeconds(0.5f); }
 
         // Displays buttons at bottom
         replayButton.SetActive(true);
