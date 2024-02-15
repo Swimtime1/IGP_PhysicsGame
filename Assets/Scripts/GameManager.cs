@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private bool keyDown;
 
     // Integer Variables
-    private int score, counter;
+    private int score;
     
     // Start is called before the first frame update
     void Start()
@@ -49,10 +49,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        keyDown = Input.anyKeyDown;
+        // allows keyDown to not be returned to false the moment a key is lifted
+        if(Input.anyKeyDown) { keyDown = true; }
         
         // Closes the Tutorial Menu
-        if(tutActive && keyDown)
+        if(tutActive && Input.anyKeyDown)
         {
             tutActive = false;
             StartGame();
@@ -105,21 +106,21 @@ public class GameManager : MonoBehaviour
     // Shows the Endgame Menu little-by-little
     IEnumerator DisplayEndgame()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         // Display Game Over text
         gameOverText.SetActive(true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         // Counts up score in UI
+        keyDown = false;
         endScore.SetActive(true);
-        counter = 0;
-        while(counter < score)
+        for(int i = 0; i < score; i++)
         {
-            UpdateScoreText(endScoreText, counter);
-            UpdateScoreColor(endScoreText, counter);
-            StartCoroutine(IncrementCounter());
+            UpdateScoreText(endScoreText, i);
+            UpdateScoreColor(endScoreText, i);
+            yield return new WaitForSeconds(0.1f);
 
             // Stops early if the player presses a key
             if(keyDown) { break; }
@@ -127,18 +128,11 @@ public class GameManager : MonoBehaviour
         UpdateScoreText(endScoreText, score);
         UpdateScoreColor(endScoreText, score);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         // Displays buttons at bottom
         replayButton.SetActive(true);
         mainMenuButton.SetActive(true);
-    }
-
-    // Increments i separately, to allow player to skip the count
-    IEnumerator IncrementCounter()
-    {
-        yield return new WaitForSeconds(0.1f);
-        counter++;
     }
 
     // Deactivates GameObjects in the scene that aren't part of the Canvas
