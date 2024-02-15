@@ -11,25 +11,17 @@ public class GameManager : MonoBehaviour
     // GameObject Variables
     public GameObject startMenu, inGameUI, instructionsMenu, endgameMenu;
     public GameObject obstacles, ball;
-
-    // Sprite Variables
+    public GameObject gameOverText, endScore, replayButton, mainMenuButton;
 
     // TextMeshProUGUI Variables
     public TextMeshProUGUI scoreText, endScoreText;
 
     // Boolean Variables
     public static bool gameActive, tutActive;
-
-    // Float Variables
+    private bool keyDown;
 
     // Integer Variables
-    private int score;
-
-    // Script Variables
-
-    // AudioSource Variables
-
-    // AudioClip Variables
+    private int score, counter;
     
     // Start is called before the first frame update
     void Start()
@@ -37,6 +29,11 @@ public class GameManager : MonoBehaviour
         gameActive = false;
         tutActive = false;
         OpenStart();
+
+        gameOverText.SetActive(false);
+        endScore.SetActive(false);
+        replayButton.SetActive(false);
+        mainMenuButton.SetActive(false);
 
         score = 0;
         scoreText.text = "Score: 00000" + score;
@@ -52,8 +49,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        keyDown = Input.anyKeyDown;
+        
         // Closes the Tutorial Menu
-        if(tutActive && Input.anyKeyDown)
+        if(tutActive && keyDown)
         {
             tutActive = false;
             StartGame();
@@ -100,7 +99,46 @@ public class GameManager : MonoBehaviour
         DisableObjects();
         CloseMenus();
         endgameMenu.SetActive(true);
-        UpdateScoreText(endScoreText);
+        StartCoroutine(DisplayEndgame());
+    }
+
+    // Shows the Endgame Menu little-by-little
+    IEnumerator DisplayEndgame()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // Display Game Over text
+        gameOverText.SetActive(true);
+
+        yield return new WaitForSeconds(1f);
+
+        // Counts up score in UI
+        endScore.SetActive(true);
+        counter = 0;
+        while(counter < score)
+        {
+            UpdateScoreText(endScoreText, counter);
+            UpdateScoreColor(endScoreText, counter);
+            StartCoroutine(IncrementCounter());
+
+            // Stops early if the player presses a key
+            if(keyDown) { break; }
+        }
+        UpdateScoreText(endScoreText, score);
+        UpdateScoreColor(endScoreText, score);
+
+        yield return new WaitForSeconds(1f);
+
+        // Displays buttons at bottom
+        replayButton.SetActive(true);
+        mainMenuButton.SetActive(true);
+    }
+
+    // Increments i separately, to allow player to skip the count
+    IEnumerator IncrementCounter()
+    {
+        yield return new WaitForSeconds(0.1f);
+        counter++;
     }
 
     // Deactivates GameObjects in the scene that aren't part of the Canvas
@@ -121,26 +159,44 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int points)
     {
         score += points;
-        UpdateScoreText(scoreText);
+        UpdateScoreText(scoreText, score);
     }
 
     // Updates the score in the UI
-    public void UpdateScoreText(TextMeshProUGUI scoreText)
+    public void UpdateScoreText(TextMeshProUGUI scoreText, int numDisplay)
     {
         // pads the score with 0's
-        if(score < 10) { scoreText.text = "Score: 00000" + score; }
-        else if(score < 100) { scoreText.text = "Score: 0000" + score; }
-        else if(score < 1000) { scoreText.text = "Score: 000" + score; }
-        else if(score < 10000) { scoreText.text = "Score: 00" + score; }
-        else if(score < 100000) { scoreText.text = "Score: 0" + score; }
-        else { scoreText.text = "Score: " + score; }
+        if(numDisplay < 10) { scoreText.text = "Score: 00000" + numDisplay; }
+        else if(numDisplay < 100) { scoreText.text = "Score: 0000" + numDisplay; }
+        else if(numDisplay < 1000) { scoreText.text = "Score: 000" + numDisplay; }
+        else if(numDisplay < 10000) { scoreText.text = "Score: 00" + numDisplay; }
+        else if(numDisplay < 100000) { scoreText.text = "Score: 0" + numDisplay; }
+        else { scoreText.text = "Score: " + numDisplay; }
+    }
+
+    // Updates the end score's color in the UI
+    public void UpdateScoreColor(TextMeshProUGUI scoreText, int numDisplay)
+    {
+        if(numDisplay < 100) { scoreText.color = new Color((255f), (255f), (255f)); }
+        else if(numDisplay < 500) { scoreText.color = new Color((119f/255f), (255f/255f), (255f/255f)); }
+        else if(numDisplay < 1000) { scoreText.color = new Color((0f/255f), (255f/255f), (83f/255f)); }
+        else if(numDisplay < 10000) { scoreText.color = new Color((255f/255f), (255f/255f), (0f/255f)); }
+        else { scoreText.color = new Color((226f/255f), (0f/255f), (255f/255f)); }
     }
 
     // Resets the score and the ball
     public void Reset()
     {
         score = 0;
-        UpdateScoreText(scoreText);
+        UpdateScoreText(scoreText, score);
+        UpdateScoreText(endScoreText, score);
+        UpdateScoreColor(endScoreText, score);
+
+        gameOverText.SetActive(false);
+        endScore.SetActive(false);
+        replayButton.SetActive(false);
+        mainMenuButton.SetActive(false);
+
         StartGame();
     }
 

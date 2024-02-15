@@ -23,8 +23,9 @@ public class GoalController : MonoBehaviour
     public SpriteRenderer sprite;
     
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
+        sprite.color = new Color((rVal/255f), (gVal/255f), (bVal/255f));
         active = true;
     }
 
