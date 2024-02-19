@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     // TextMeshProUGUI Variables
     public TextMeshProUGUI scoreText, endScoreText;
+    public TextMeshProUGUI clickToStartText;
 
     // Boolean Variables
     public static bool gameActive, tutActive;
@@ -46,6 +47,8 @@ public class GameManager : MonoBehaviour
 
         score = 0;
         scoreText.text = "Score: 00000" + score;
+
+        StartCoroutine(BlinkStartText());
     }
 
     // Gives control over to the Player
@@ -217,5 +220,27 @@ public class GameManager : MonoBehaviour
     {
         leverWall.isTrigger = false;
         leverWallSprite.sprite = squareSprite;
+    }
+
+    // Causes clickToStartText to blink
+    IEnumerator BlinkStartText()
+    {
+        // stops when the Start Menu is no longer showing
+        while(startMenu.activeSelf)
+        {
+            // decreases transparency
+            for(float i = 0f; i < 255f; i++)
+            {
+                clickToStartText.color = new Color(0f, 0f, 0f, (i/255f));
+                yield return new WaitForSeconds(0.001f);
+            }
+
+            // increases transparency
+            for(float i = 255f; i > 0f; i--)
+            {
+                clickToStartText.color = new Color(0f, 0f, 0f, (i/255f));
+                yield return new WaitForSeconds(0.001f);
+            }
+        }
     }
 }
