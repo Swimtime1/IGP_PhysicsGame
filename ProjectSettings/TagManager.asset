@@ -8,6 +8,7 @@ TagManager:
   - 1000
   - 500
   - 100
+  - Lever Wall
   layers:
   - Default
   - TransparentFX

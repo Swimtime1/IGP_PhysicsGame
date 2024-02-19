@@ -64,4 +64,11 @@ public class BallController : MonoBehaviour
         // checks if the 100 point goal was triggered
         else if(other.gameObject.CompareTag("100")) { StartCoroutine(gc100.Trigger()); }
     }
+
+    // Called when a trigger is exited
+    void OnTriggerExit2D(Collider2D other)
+    {
+        // Solidifies Lever Wall
+        if(other.gameObject.CompareTag("Lever Wall")) { gameManager.AltLeverWall(); }
+    }
 }

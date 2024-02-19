@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
 
     // Integer Variables
     private int score;
+
+    // BoxCollider2D Variables
+    public BoxCollider2D leverWall;
+
+    // SpriteRenderer Variables
+    public SpriteRenderer sprite;
     
     // Start is called before the first frame update
     void Start()
@@ -43,6 +49,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         OpenGameUI();
+        leverWall.isTrigger = true;
         gameActive = true;
     }
 
@@ -123,7 +130,7 @@ public class GameManager : MonoBehaviour
         {
             UpdateScoreText(endScoreText, i);
             UpdateScoreColor(endScoreText, i);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
         UpdateScoreText(endScoreText, score);
         UpdateScoreColor(endScoreText, score);
@@ -199,5 +206,11 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // Sets the Lever Wall to a collider
+    public void AltLeverWall()
+    {
+        leverWall.isTrigger = false;
     }
 }
