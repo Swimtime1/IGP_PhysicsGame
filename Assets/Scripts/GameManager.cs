@@ -27,7 +27,10 @@ public class GameManager : MonoBehaviour
     public BoxCollider2D leverWall;
 
     // SpriteRenderer Variables
-    public SpriteRenderer sprite;
+    public SpriteRenderer leverWallSprite;
+
+    // Sprite Variables
+    public Sprite noSprite, squareSprite;
     
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         OpenGameUI();
         leverWall.isTrigger = true;
+        leverWallSprite.sprite = noSprite;
         gameActive = true;
     }
 
@@ -212,5 +216,6 @@ public class GameManager : MonoBehaviour
     public void AltLeverWall()
     {
         leverWall.isTrigger = false;
+        leverWallSprite.sprite = squareSprite;
     }
 }

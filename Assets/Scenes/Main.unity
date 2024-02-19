@@ -3928,13 +3928,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674476984}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.0148, y: -0.756, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0.043619405, w: 0.9990483}
+  m_LocalPosition: {x: 2.9934, y: -0.709, z: 0}
   m_LocalScale: {x: 0.99974257, y: 0.1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 894003333}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 5}
 --- !u!61 &674476986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -18732,7 +18732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1605287077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20584,7 +20584,9 @@ MonoBehaviour:
   scoreText: {fileID: 933543952}
   endScoreText: {fileID: 1766711230}
   leverWall: {fileID: 674476986}
-  sprite: {fileID: 0}
+  leverWallSprite: {fileID: 674476987}
+  noSprite: {fileID: 0}
+  squareSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
 --- !u!1 &1851785595
 GameObject:
   m_ObjectHideFlags: 0
