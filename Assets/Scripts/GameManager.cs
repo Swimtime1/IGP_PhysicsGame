@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     // TextMeshProUGUI Variables
     public TextMeshProUGUI scoreText, endScoreText;
     public TextMeshProUGUI clickToStartText;
+    public TextMeshProUGUI leftFlipTutText, rightFlipTutText;
 
     // Boolean Variables
     public static bool gameActive, tutActive;
@@ -32,6 +33,9 @@ public class GameManager : MonoBehaviour
 
     // Sprite Variables
     public Sprite noSprite, squareSprite;
+
+    // Image Variables
+    public Image leftFlipTut, rightFlipTut;
     
     // Start is called before the first frame update
     void Start()
@@ -55,8 +59,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         OpenGameUI();
-        leverWall.isTrigger = true;
-        leverWallSprite.sprite = noSprite;
         gameActive = true;
     }
 
@@ -96,7 +98,9 @@ public class GameManager : MonoBehaviour
     {
         CloseMenus();
         instructionsMenu.SetActive(true);
+        ActivateObjects();
         tutActive = true;
+        StartCoroutine(BlinkTut());
     }
 
     // Opens the In-Game UI Menu
@@ -155,6 +159,8 @@ public class GameManager : MonoBehaviour
     {
         obstacles.SetActive(false);
         ball.SetActive(false);
+        leverWall.isTrigger = true;
+        leverWallSprite.sprite = noSprite;
     }
 
     // Activates GameObjects in the scene that aren't part of the Canvas
@@ -242,5 +248,39 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(0.001f);
             }
         }
+    }
+
+    // Causes Tutorial Buttons to blink
+    IEnumerator BlinkTut()
+    {
+        // stops when the Start Menu is no longer showing
+        while(tutActive)
+        {
+            // decreases transparency
+            for(float i = 150f; i < 255f; i++)
+            {
+                TutBlink(i);
+                yield return new WaitForSeconds(0.005f);
+            }
+
+            // increases transparency
+            for(float i = 255f; i > 150f; i--)
+            {
+                TutBlink(i);
+                yield return new WaitForSeconds(0.005f);
+            }
+        }
+    }
+
+    // Updates the Tutorial Buttons' colors
+    void TutBlink(float i)
+    {
+        Color butCol = new Color((50f/255f), (50f/255f), (50f/255f), (i/255f));
+        Color textCol = new Color(1f, 1f, 1f, (i/255f));
+        
+        leftFlipTut.color = butCol;
+        rightFlipTut.color = butCol;
+        leftFlipTutText.color = textCol;
+        rightFlipTutText.color = textCol;
     }
 }
