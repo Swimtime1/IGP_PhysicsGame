@@ -23,4 +23,4 @@ RESOURCES:
 * https://discussions.unity.com/t/setting-rigidbodys-force-to-0/114358
 * https://pinside.com/pinball/forum/topic/flippers-weight
 * https://freesound.org/people/deleted_user_13668154/sounds/616483/
-* 
+* https://freesound.org/people/zagi2/sounds/339124/
